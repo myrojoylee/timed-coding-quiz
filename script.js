@@ -16,5 +16,11 @@ function startQuiz() {
   //we need the intro stuff to go away
   beforeQuizContent.style.display = "none";
   quizCardContent.style.display = "flex";
-  console.log("yay");
+
+  //we need to start the timer
+  console.log("is the timer starting?!?");
+}
+
+function buildTimer() {
+  // we build timer
 }
