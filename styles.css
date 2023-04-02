@@ -1,4 +1,5 @@
-/* ================ RESET ==============*/
+/* ========================== RESET ========================= */
+/* ========================================================== */
 
 * {
   margin: 0;
@@ -20,7 +21,8 @@
   --fw--header: 700;
 }
 
-/* ================ GENERAL STYLING ==============*/
+/* ====================== GENERAL STYLING =================== */
+/* ========================================================== */
 
 body {
   border: 1px solid grey;
@@ -32,18 +34,19 @@ body {
   font-family: var(--ff--body);
 }
 
-/* ================ Quiz card component styling ==============*/
+/* ================ Quiz card component styling ============= */
+/* ========================================================== */
+
 .quiz-card {
   display: flex;
   flex-direction: column;
   border: 0.2em solid #374151;
   border-radius: 1em;
   width: 90%;
-  height: 55vw;
-  padding: 1em 2em;
-  gap: 5em;
-  text-align: center;
-  line-height: 1.5;
+  height: 50vw;
+  padding: 2em;
+  gap: 2em;
+  line-height: 1.25;
 }
 
 header {
@@ -52,53 +55,121 @@ header {
   color: var(--clr--secondary);
 }
 
+.quiz-card-content {
+  display: none;
+  flex-direction: column;
+  padding: 0 10em;
+  gap: 1em;
+}
+
 .quiz-card-title {
   font-size: 2em;
   font-weight: var(--fw--header);
 }
 
-.quiz-card-question {
+.quiz-card-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: auto;
   height: 100%;
-  padding: 1em 5em;
+  padding: 0 5em;
+}
+
+.quiz-card-question {
   font-size: 2em;
+}
+
+/* ~~~~~~~~~~~~~~~ button styles ~~~~~~~~~~~~~ */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+.option-buttons {
+  display: flex;
+  width: 100%;
+  padding: 0;
+  gap: 0.5em;
 }
 
 .btn {
   background-color: var(--clr--primary);
   border-radius: 0.5em;
   color: var(--clr--ntrl--light);
-  padding: 0.75em 1.25em;
-  margin: 1em;
+  padding: 0.5em 1em;
+  width: 35%;
+  text-align: left;
+  font-size: 1.3em;
 }
 
+.btn:hover {
+  background-color: var(--clr--secondary);
+  cursor: pointer;
+}
+
+/* =============== Introduction Content styling ============= */
+/* ========================================================== */
+
+.before-quiz-content {
+  text-align: center;
+  padding: 0 8.5em;
+  font-size: 1em;
+}
+
+.before-quiz-content p {
+  padding: 1em 0;
+  font-size: 1.25em;
+}
+
+.start {
+  text-align: center;
+  width: fit-content;
+}
+
+/* =-=-=-=-=-=-=-=-=-=- RESPONSIVE STYLING -=-=-=-=-=-=-=-=-=-=-= */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .quiz-card {
-    gap: 3em;
+    gap: 1.25em;
   }
 
-  .quiz-card-question {
-    padding: 0.5em;
+  .quiz-card-content {
+    padding: 0 7.5em;
+  }
+
+  .option-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .btn {
+    width: 90%;
   }
 }
 
 @media screen and (max-width: 767px) {
   .quiz-card {
-    padding: 0 1em;
+    padding: 1em;
     gap: 0.5em;
   }
 
-  .quiz-card-title {
-    font-size: 1.25em;
-  }
-
   .quiz-card-question {
-    font-size: 1em;
+    font-size: 1.25em;
     padding: 0;
     line-height: 1em;
   }
 
+  .quiz-card-content {
+    padding: 0 1em;
+  }
+
+  .option-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
   .btn {
     padding: 0.5em;
+    width: 100%;
+    font-size: 1em;
   }
 }
