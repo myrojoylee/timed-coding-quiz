@@ -13,15 +13,15 @@ var questionSeven = ["7th Q goes here"];
 var questionEight = ["8th Q goes here"];
 var questionNine = ["9th Q goes here"];
 var questionTen = ["10th Q goes here"];
-var answerTwo = ["two", "curly brackets", "parentheses", "square brackets"];
-var answerThree = ["three", "curly brackets", "parentheses", "square brackets"];
-var answerFour = ["four", "curly brackets", "parentheses", "square brackets"];
-var answerFive = ["five", "curly brackets", "parentheses", "square brackets"];
-var answerSix = ["six", "curly brackets", "parentheses", "square brackets"];
-var answerSeven = ["seven", "curly brackets", "parentheses", "square brackets"];
-var answerEight = ["eight", "curly brackets", "parentheses", "square brackets"];
-var answerNine = ["nine", "curly brackets", "parentheses", "square brackets"];
-var answerTen = ["ten", "curly brackets", "parentheses", "square brackets"];
+var optionTwo = ["two", "curly brackets", "parentheses", "square brackets"];
+var optionThree = ["three", "curly brackets", "parentheses", "square brackets"];
+var optionFour = ["four", "curly brackets", "parentheses", "square brackets"];
+var optionFive = ["five", "curly brackets", "parentheses", "square brackets"];
+var optionSix = ["six", "curly brackets", "parentheses", "square brackets"];
+var optionSeven = ["seven", "curly brackets", "parentheses", "square brackets"];
+var optionEight = ["eight", "curly brackets", "parentheses", "square brackets"];
+var optionNine = ["nine", "curly brackets", "parentheses", "square brackets"];
+var optionTen = ["ten", "curly brackets", "parentheses", "square brackets"];
 var quizQuestionBank = [
   questionTwo,
   questionThree,
@@ -33,17 +33,29 @@ var quizQuestionBank = [
   questionNine,
   questionTen,
 ];
-var answerBank = [
-  answerTwo,
-  answerThree,
-  answerFour,
-  answerFive,
-  answerSix,
-  answerSeven,
-  answerEight,
-  answerNine,
-  answerTen,
+var optionBank = [
+  optionTwo,
+  optionThree,
+  optionFour,
+  optionFive,
+  optionSix,
+  optionSeven,
+  optionEight,
+  optionNine,
+  optionTen,
 ];
+
+const quizQuestionOne = {
+  question: "1st Q goes here",
+  answer: "alerts",
+};
+
+const quizQuestionTo = {
+  question: "2nd Q goes here",
+  answer: "",
+};
+
+const quizBank = [quizQuestionOne];
 
 var highScores = [];
 var int = null;
@@ -54,7 +66,8 @@ var startTimer = document.querySelector("#start-quiz");
 var beforeQuizContent = document.querySelector(".before-quiz-content");
 var quizCardContent = document.querySelector(".quiz-card-content");
 var quizCardQuestion = document.querySelector("h1");
-var clickToGetFeedback = document.querySelector(".options");
+var answerOption = document.querySelectorAll(".answer");
+var answerFeedback = document.querySelectorAll(".options");
 startTimer.addEventListener("click", startQuiz);
 // clickToGetFeedback.addEventLIstener("click", continueQuiz);
 
@@ -63,9 +76,15 @@ startTimer.addEventListener("click", startQuiz);
 // ==================================================================== //
 
 function startQuiz() {
-  //we need the intro stuff to go away
+  // we need the intro stuff to go away
   beforeQuizContent.style.display = "none";
   quizCardContent.style.display = "flex";
+
+  // adding event listeners to all answer options
+  for (var i = 0; i < answerFeedback.length; i++) {
+    answerFeedback[i].addEventListener("click", rightOrWrong);
+    answerOption[i].addEventListener("click", rightOrWrong);
+  }
 
   //we need to start the timer
   quizCountdown.innerHTML = `Time: ${seconds}`;
@@ -73,6 +92,17 @@ function startQuiz() {
     clearInterval(int);
   }
   int = setInterval(displayCountdown, 1000);
+}
+
+function rightOrWrong() {
+  var x = this.innerHTML;
+  console.log(x);
+
+  // HELP MEEEE
+
+  for (var i = 0; i < answerOption.length; i++) {
+    console.log(answerOption[i].children[i].textContent);
+  }
 }
 
 function displayCountdown() {
