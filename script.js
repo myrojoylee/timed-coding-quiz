@@ -125,6 +125,10 @@ function continueQuiz() {
   console.log("going to the next question");
 }
 
+function endGame() {
+  // game ends
+}
+
 function enterHighScores() {
   // after quiz ends
   // user enters high scores
