@@ -11,6 +11,8 @@ Demo:
 
 [Click here for live demo]()
 
+## Credits
+
 ## License
 
 Refer to the license in the repository.

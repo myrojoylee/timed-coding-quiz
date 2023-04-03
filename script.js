@@ -66,10 +66,12 @@ var startTimer = document.querySelector("#start-quiz");
 var beforeQuizContent = document.querySelector(".before-quiz-content");
 var quizCardContent = document.querySelector(".quiz-card-content");
 var quizCardQuestion = document.querySelector("h1");
-var answerOption = document.querySelectorAll(".answer");
+// var answerOption = document.querySelectorAll("button");
 var answerFeedback = document.querySelectorAll(".options");
 startTimer.addEventListener("click", startQuiz);
 // clickToGetFeedback.addEventLIstener("click", continueQuiz);
+var rightAnswer = document.querySelector(".right-answer");
+var wrongAnswer = document.querySelector(".wrong-answer");
 
 // ==================================================================== //
 //            -------------------CODE BELOW------------------
@@ -83,7 +85,6 @@ function startQuiz() {
   // adding event listeners to all answer options
   for (var i = 0; i < answerFeedback.length; i++) {
     answerFeedback[i].addEventListener("click", rightOrWrong);
-    answerOption[i].addEventListener("click", rightOrWrong);
   }
 
   //we need to start the timer
@@ -94,32 +95,34 @@ function startQuiz() {
   int = setInterval(displayCountdown, 1000);
 }
 
-function rightOrWrong() {
-  var x = this.innerHTML;
-  console.log(x);
-
-  // HELP MEEEE
-
-  for (var i = 0; i < answerOption.length; i++) {
-    console.log(answerOption[i].children[i].textContent);
+// give user feedback after they
+// choose answer
+function rightOrWrong(e) {
+  if (e.currentTarget.children[1].textContent === quizBank[0].answer) {
+    rightAnswer.style.display = "block";
+    wrongAnswer.style.display = "none";
+  } else {
+    rightAnswer.style.display = "none";
+    wrongAnswer.style.display = "block";
+    seconds = seconds - 10;
   }
 }
 
+// we show the timer to count
+// down every second.
+
 function displayCountdown() {
-  // we show the timer to count
-  // down every second.
-  seconds--;
-  quizCountdown.innerHTML = `Time: ${seconds}`;
+  if (seconds > 0) {
+    seconds--;
+    quizCountdown.innerHTML = `Time: ${seconds}`;
+  } else {
+    clearInterval(int);
+  }
 }
 
 function continueQuiz() {
   // loop through all the questions
   console.log("going to the next question");
-}
-
-function checkAnswer() {
-  // display real time feedback
-  // take ten seconds off of timer
 }
 
 function enterHighScores() {
