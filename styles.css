@@ -15,6 +15,7 @@
 
   --clr--ntrl--dark: black;
   --clr--ntrl--light: white;
+  --clr--ntrl--grey: #d1d5db;
 
   --ff--body: sans-serif;
   --fw--content: 400;
@@ -38,7 +39,7 @@ body {
 /* ========================================================== */
 
 .quiz-card {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   border: 0.2em solid #374151;
   border-radius: 1em;
@@ -62,6 +63,18 @@ header {
   gap: 1em;
 }
 
+/* Hiding feedback until after user answers question  */
+.wrong-answer,
+.right-answer {
+  display: none;
+  width: 100%;
+  border-top: 1px solid var(--clr--ntrl--grey);
+  margin-top: 0.5em;
+  font-size: 1.25em;
+  font-style: italic;
+  color: var(--clr--ntrl--grey);
+}
+
 .quiz-card-title {
   font-size: 2em;
   font-weight: var(--fw--header);
@@ -82,6 +95,9 @@ header {
 
 /* ~~~~~~~~~~~~~~~ button styles ~~~~~~~~~~~~~ */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/* We need to set display to none */
+/* so that intro content comes first */
 .option-buttons {
   display: grid;
   width: 100%;
