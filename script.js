@@ -65,13 +65,21 @@ var quizCountdown = document.querySelector(".quiz-countdown");
 var startTimer = document.querySelector("#start-quiz");
 var beforeQuizContent = document.querySelector(".before-quiz-content");
 var quizCardContent = document.querySelector(".quiz-card-content");
-var quizCardQuestion = document.querySelector("h1");
+var quizCardQuestion = document.querySelector(".quiz-card-question");
+var quizComplete = document.querySelector(".quiz-complete");
 // var answerOption = document.querySelectorAll("button");
 var answerFeedback = document.querySelectorAll(".options");
 startTimer.addEventListener("click", startQuiz);
 // clickToGetFeedback.addEventLIstener("click", continueQuiz);
 var rightAnswer = document.querySelector(".right-answer");
 var wrongAnswer = document.querySelector(".wrong-answer");
+// submit button
+var userHighScore = "";
+var submitScore = document.querySelector(".submit-high-score");
+var seeHighScore = document.querySelector(".see-high-scores");
+var highScoreMessage = document.querySelector(".high-score-message");
+var goBack = document.querySelector(".go-back");
+var clearHighScore = document.querySelector(".clear");
 
 // ==================================================================== //
 //            -------------------CODE BELOW------------------
@@ -117,6 +125,8 @@ function displayCountdown() {
     quizCountdown.innerHTML = `Time: ${seconds}`;
   } else {
     clearInterval(int);
+    quizCountdown.innerHTML = `Time: 0`;
+    endGame();
   }
 }
 
@@ -127,9 +137,20 @@ function continueQuiz() {
 
 function endGame() {
   // game ends
+  quizCardContent.style.display = "none";
+  quizComplete.style.display = "flex";
+  submitScore.addEventListener("click", endScreen);
 }
 
-function enterHighScores() {
-  // after quiz ends
-  // user enters high scores
+function endScreen() {
+  // we set the high scores in a list
+  userHighScore = document.querySelector("#initial").value;
+  highScores.push(userHighScore);
+  highScoreMessage.innerHTML = highScores[0];
+  seeHighScore.style.display = "flex";
+  quizComplete.style.display = "none";
+}
+
+function whatDoWeDoHere() {
+  console.log(`don't know`);
 }

@@ -16,6 +16,7 @@
   --clr--ntrl--dark: black;
   --clr--ntrl--light: white;
   --clr--ntrl--grey: #d1d5db;
+  --clr--ntrl--purple: #d9d3e9;
 
   --ff--body: sans-serif;
   --fw--content: 400;
@@ -59,7 +60,7 @@ header {
 .quiz-card-content {
   display: none;
   flex-direction: column;
-  padding: 0 10em;
+  padding: 2em 10em;
   gap: 1em;
 }
 
@@ -86,7 +87,7 @@ header {
   align-items: center;
   width: auto;
   height: 100%;
-  padding: 0 5em;
+  padding: 1em 5em;
 }
 
 .quiz-card-question {
@@ -144,6 +145,70 @@ header {
 .start {
   text-align: center;
   width: fit-content;
+}
+
+/* =============== Form and End Message styling ============= */
+/* ========================================================== */
+
+.quiz-complete {
+  display: none;
+  /* display: flex; */
+  flex-direction: column;
+  padding: 2em 8em 2em 10em;
+  gap: 1em;
+}
+
+.score-wrapper {
+  display: flex;
+  align-items: center;
+  font-size: 1.25em;
+  gap: 0.5em;
+}
+
+.initials {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+#initials {
+  width: 25vw;
+  border: 1px solid grey;
+}
+
+.end-statement,
+.high-score-title {
+  font-size: 2em;
+}
+
+.submit-high-score {
+  width: fit-content;
+}
+
+/* ================ High Score Section styling ============== */
+/* ========================================================== */
+
+.see-high-scores {
+  display: none;
+  flex-direction: column;
+  padding: 2em 8em 2em 10em;
+  gap: 1em;
+}
+
+.high-score-message {
+  background-color: var(--clr--ntrl--purple);
+  font-size: 1.25em;
+  padding: 0.25em;
+}
+
+.go-back,
+.clear {
+  width: fit-content;
+}
+
+.clear-high-scores,
+.go {
+  font-size: 1.25em;
 }
 
 /* =-=-=-=-=-=-=-=-=-=- RESPONSIVE STYLING -=-=-=-=-=-=-=-=-=-=-= */
