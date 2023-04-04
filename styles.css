@@ -1,4 +1,4 @@
-/* ========================== RESET ========================= */
+/* ================== RESET/ROOT VARIABLES ================== */
 /* ========================================================== */
 
 * {
@@ -131,7 +131,7 @@ header {
 /* ========================================================== */
 
 .before-quiz-content {
-  /* display: none; */
+  display: none;
   text-align: center;
   padding: 0 8.5em;
   font-size: 1em;
@@ -189,7 +189,8 @@ header {
 /* ========================================================== */
 
 .see-high-scores {
-  display: none;
+  /* display: none; */
+  display: flex;
   flex-direction: column;
   padding: 2em 8em 2em 10em;
   gap: 1em;
@@ -211,8 +212,8 @@ header {
   font-size: 1.25em;
 }
 
-/* =-=-=-=-=-=-=-=-=-=- RESPONSIVE STYLING -=-=-=-=-=-=-=-=-=-=-= */
-/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/* =-=-=-=-=-=-=-=-=-=- RESPONSIVE STYLING, -=-=-=-=-=-=-=-=-=-=-= */
+/* =-=-=-=-=-=-=-=-=-=-=-=-= TABLET =-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .quiz-card {
     gap: 1.25em;
@@ -235,7 +236,23 @@ header {
   .start {
     width: fit-content;
   }
+
+  .see-high-scores {
+    /* display: none; */
+    display: flex;
+    flex-direction: column;
+    padding: 2em 5em;
+    gap: 1em;
+  }
+
+  .go-back,
+  .clear {
+    width: fit-content;
+  }
 }
+
+/* =-=-=-=-=-=-=-=-=-=- RESPONSIVE STYLING, -=-=-=-=-=-=-=-=-=-=-= */
+/* =-=-=-=-=-=-=-=-=-=-=-=-= MOBILE =-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
 @media screen and (max-width: 767px) {
   .quiz-card {
@@ -278,6 +295,29 @@ header {
   }
 
   .start {
+    width: fit-content;
+  }
+
+  .see-high-scores {
+    /* display: none; */
+    display: flex;
+    flex-direction: column;
+    padding: 0.75em 2em;
+    gap: 0.5em;
+  }
+
+  .high-score-title {
+    font-size: 1.25em;
+  }
+
+  .clear-high-scores,
+  .go,
+  .high-score-message {
+    font-size: 0.75em;
+  }
+
+  .go-back,
+  .clear {
     width: fit-content;
   }
 }

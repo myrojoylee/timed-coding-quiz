@@ -144,7 +144,7 @@ function endGame() {
 
 function endScreen() {
   // we set the high scores in a list
-  userHighScore = document.querySelector("#initial").value;
+  userHighScore = document.querySelector("#initials").value;
   highScores.push(userHighScore);
   highScoreMessage.innerHTML = highScores[0];
   seeHighScore.style.display = "flex";
