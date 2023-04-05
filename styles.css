@@ -56,6 +56,10 @@ header {
   color: var(--clr--secondary);
 }
 
+.view-high-scores {
+  cursor: pointer;
+}
+
 .quiz-card-content {
   display: none;
   flex-direction: column;
@@ -285,6 +289,13 @@ header {
     font-size: 1em;
     padding-top: 0.5em;
     line-height: 1em;
+  }
+
+  .wrong-answer,
+  .right-answer {
+    border-top: 1px solid var(--clr--ntrl--grey);
+    margin-top: 0.25em;
+    font-size: 0.75em;
   }
 
   .quiz-card-title {

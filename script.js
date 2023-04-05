@@ -1,89 +1,119 @@
 //=================
 
-// ================= ARRAYS FOR QUESTIONS AND ANSWERS ===================== //
+// ================= OBJECTS FOR QUESTIONS AND ANSWERS ==================== //
 // ======================================================================== //
-var questionTwo = [
-  "The condition in an if / else statement is enclosed with ___________.",
-];
-var questionThree = ["3rd Q goes here"];
-var questionFour = ["4th Q goes here"];
-var questionFive = ["5th Q goes here"];
-var questionSix = ["6th Q goes here"];
-var questionSeven = ["7th Q goes here"];
-var questionEight = ["8th Q goes here"];
-var questionNine = ["9th Q goes here"];
-var questionTen = ["10th Q goes here"];
-var optionTwo = ["two", "curly brackets", "parentheses", "square brackets"];
-var optionThree = ["three", "curly brackets", "parentheses", "square brackets"];
-var optionFour = ["four", "curly brackets", "parentheses", "square brackets"];
-var optionFive = ["five", "curly brackets", "parentheses", "square brackets"];
-var optionSix = ["six", "curly brackets", "parentheses", "square brackets"];
-var optionSeven = ["seven", "curly brackets", "parentheses", "square brackets"];
-var optionEight = ["eight", "curly brackets", "parentheses", "square brackets"];
-var optionNine = ["nine", "curly brackets", "parentheses", "square brackets"];
-var optionTen = ["ten", "curly brackets", "parentheses", "square brackets"];
-var quizQuestionBank = [
-  questionTwo,
-  questionThree,
-  questionFour,
-  questionFive,
-  questionSix,
-  questionSeven,
-  questionEight,
-  questionNine,
-  questionTen,
-];
-var optionBank = [
-  optionTwo,
-  optionThree,
-  optionFour,
-  optionFive,
-  optionSix,
-  optionSeven,
-  optionEight,
-  optionNine,
-  optionTen,
-];
 
 const quizQuestionOne = {
-  question: "1st Q goes here",
+  question: "Commonly used data types DO NOT include:",
   answer: "alerts",
+  options: ["strings", "booleans", "alerts", "numbers"],
 };
 
-const quizQuestionTo = {
-  question: "2nd Q goes here",
-  answer: "",
+const quizQuestionTwo = {
+  question:
+    "The condition in an if/else statement is enclosed within ____________.",
+  answer: "parentheses",
+  options: ["quotes", "parentheses", "curly brackets", "square brackets"],
 };
 
-const quizBank = [quizQuestionOne];
+const quizQuestionThree = {
+  question: "If x = [9, 2, 3, 4], what should the output of x.slice(0,2) be?",
+  answer: "[9, 2]",
+  options: ["[9, 3]", "[9, 2, 3]", "[9, 2, 4]", "[9, 2]"],
+};
+const quizQuestionFour = {
+  question: `Accessing a variable x returns as 'not defined'. The variable could be:`,
+  answer: "out of scope",
+  options: ["in scope", "out of scope", "in sync", "out of sync"],
+};
 
-var highScores = [];
-var int = null;
-var seconds = 75;
+const quizQuestionFive = {
+  question: "Flexbox is a model used for ",
+  answer: "layout",
+  options: ["layout", "DOM manipulation", "hex codes", "ES 6 algorithms"],
+};
 
-var quizCountdown = document.querySelector(".quiz-countdown");
-var startTimer = document.querySelector("#start-quiz");
-var beforeQuizContent = document.querySelector(".before-quiz-content");
-var quizCardContent = document.querySelector(".quiz-card-content");
-var quizCardQuestion = document.querySelector(".quiz-card-question");
-var quizComplete = document.querySelector(".quiz-complete");
+const quizQuestionSix = {
+  question: "What command do we use to stage our files?",
+  answer: "git add",
+  options: ["git stage", "git commit", "git add", "git push"],
+};
+
+const quizQuestionSeven = {
+  question: "Visual Studio Code is an example of a ",
+  answer: "code editor",
+  options: [
+    "word processor",
+    "version control system",
+    "remote debugger",
+    "code editor",
+  ],
+};
+
+const quizQuestionEight = {
+  question: "'9' === 9 when typed in the console should return",
+  answer: "false",
+  options: ["true", "false", "undefined", "null"],
+};
+
+const quizQuestionNine = {
+  question: "addEventListener() is a type of ____________.",
+  answer: "method",
+  options: ["method", "framework", "party", "pseudo-class"],
+};
+
+const quizQuestionTen = {
+  question: "____ notation is a common way to access element in JavaScript.",
+  answer: "dot",
+  options: ["string", "quote", "dot", "comma"],
+};
+
+const quizBank = [
+  quizQuestionOne,
+  quizQuestionTwo,
+  quizQuestionThree,
+  quizQuestionFour,
+  quizQuestionFive,
+  quizQuestionSix,
+  quizQuestionSeven,
+  quizQuestionEight,
+  quizQuestionNine,
+  quizQuestionTen,
+];
+
+let highScores = [];
+let int = null;
+let seconds = 75;
+let count = 1;
+let quizInterval;
+let currentAnswer = quizBank[0].answer;
+
+const quizCountdown = document.querySelector(".quiz-countdown");
+const startTimer = document.querySelector("#start-quiz");
+const beforeQuizContent = document.querySelector(".before-quiz-content");
+const quizCardContent = document.querySelector(".quiz-card-content");
+const quizCardQuestion = document.querySelector(".quiz-card-question");
+const quizComplete = document.querySelector(".quiz-complete");
 // var answerOption = document.querySelectorAll("button");
-var answerFeedback = document.querySelectorAll(".options");
-startTimer.addEventListener("click", startQuiz);
+const answerFeedback = document.querySelectorAll(".options");
+
 // clickToGetFeedback.addEventLIstener("click", continueQuiz);
-var rightAnswer = document.querySelector(".right-answer");
-var wrongAnswer = document.querySelector(".wrong-answer");
+const rightAnswer = document.querySelector(".right-answer");
+const wrongAnswer = document.querySelector(".wrong-answer");
+const textAnswer = document.querySelectorAll(".answer");
 // submit button
-var userHighScore = "";
-var submitScore = document.querySelector(".submit-high-score");
-var seeHighScore = document.querySelector(".see-high-scores");
-var highScoreMessage = document.querySelector(".high-score-message");
-var goBack = document.querySelector(".go-back");
-var clearHighScore = document.querySelector(".clear");
+let userHighScore = "";
+const submitScore = document.querySelector(".submit-high-score");
+const seeHighScore = document.querySelector(".see-high-scores");
+const highScoreMessage = document.querySelector(".high-score-message");
+const goBack = document.querySelector(".go-back");
+const clearHighScore = document.querySelector(".clear");
 
 // ==================================================================== //
 //            -------------------CODE BELOW------------------
 // ==================================================================== //
+// quiz begins when 'start quiz' is clicked:
+startTimer.addEventListener("click", startQuiz);
 
 function startQuiz() {
   // we need the intro stuff to go away
@@ -91,22 +121,28 @@ function startQuiz() {
   quizCardContent.style.display = "flex";
 
   // adding event listeners to all answer options
-  for (var i = 0; i < answerFeedback.length; i++) {
+  for (let i = 0; i < answerFeedback.length; i++) {
     answerFeedback[i].addEventListener("click", rightOrWrong);
   }
 
   //we need to start the timer
   quizCountdown.innerHTML = `Time: ${seconds}`;
-  if (int !== null) {
-    clearInterval(int);
-  }
-  int = setInterval(displayCountdown, 1000);
+  quizInterval = setInterval(function () {
+    if (seconds > 0) {
+      seconds--;
+      quizCountdown.innerHTML = `Time: ${seconds}`;
+    } else {
+      clearInterval(quizInterval);
+      quizCountdown.innerHTML = `Time: 0`;
+      endGame();
+    }
+  }, 1000);
 }
 
 // give user feedback after they
 // choose answer
 function rightOrWrong(e) {
-  if (e.currentTarget.children[1].textContent === quizBank[0].answer) {
+  if (e.currentTarget.children[1].textContent === currentAnswer) {
     rightAnswer.style.display = "block";
     wrongAnswer.style.display = "none";
   } else {
@@ -114,25 +150,32 @@ function rightOrWrong(e) {
     wrongAnswer.style.display = "block";
     seconds = seconds - 10;
   }
-}
-
-// we show the timer to count
-// down every second.
-
-function displayCountdown() {
-  if (seconds > 0) {
-    seconds--;
-    quizCountdown.innerHTML = `Time: ${seconds}`;
-  } else {
-    clearInterval(int);
-    quizCountdown.innerHTML = `Time: 0`;
-    endGame();
-  }
+  // go to next Q after 500ms
+  setTimeout(() => {
+    continueQuiz();
+  }, 500);
 }
 
 function continueQuiz() {
   // loop through all the questions
-  console.log("going to the next question");
+  // replace values with
+  // question/answer bank
+  rightAnswer.style.display = "none";
+  wrongAnswer.style.display = "none";
+  console.log("here?");
+  if (seconds > 0) {
+    for (let i = 1; i < quizBank.length; i++) {
+      quizCardQuestion.innerHTML = quizBank[i].question;
+      let x = quizBank[i];
+      for (let i = 0; i < x.options.length; i++) {
+        textAnswer[i].innerHTML = x.options[i];
+      }
+      currentAnswer = quizBank[i].answer;
+      rightOrWrong();
+    }
+  } else {
+    endGame();
+  }
 }
 
 function endGame() {
@@ -140,6 +183,9 @@ function endGame() {
   quizCardContent.style.display = "none";
   quizComplete.style.display = "flex";
   submitScore.addEventListener("click", endScreen);
+  goBack.addEventListener("click", function () {
+    location.reload();
+  });
 }
 
 function endScreen() {
@@ -151,6 +197,7 @@ function endScreen() {
   quizComplete.style.display = "none";
 }
 
+// need to implement local storage
 function whatDoWeDoHere() {
   console.log(`don't know`);
 }
