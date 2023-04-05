@@ -126,14 +126,14 @@ function startQuiz() {
   }
 
   //we need to start the timer
-  quizCountdown.innerHTML = `Time: ${seconds}`;
+  quizCountdown.textContent = `Time: ${seconds}`;
   quizInterval = setInterval(function () {
     if (seconds > 0) {
       seconds--;
-      quizCountdown.innerHTML = `Time: ${seconds}`;
+      quizCountdown.textContent = `Time: ${seconds}`;
     } else {
       clearInterval(quizInterval);
-      quizCountdown.innerHTML = `Time: 0`;
+      quizCountdown.textContent = `Time: 0`;
       endGame();
     }
   }, 1000);
@@ -166,13 +166,13 @@ function continueQuiz() {
   if (seconds > 0) {
     for (let i = 1; i < quizBank.length; i++) {
       console.log("hi");
-      quizCardQuestion.innerHTML = quizBank[i].question;
+      quizCardQuestion.textContent = quizBank[i].question;
       let x = quizBank[i];
       for (let i = 0; i < x.options.length; i++) {
-        textAnswer[i].innerHTML = x.options[i];
+        textAnswer[i].textContent = x.options[i];
       }
       currentAnswer = quizBank[i].answer;
-      rightOrWrong();
+      // rightOrWrong();
     }
   } else {
     endGame();
@@ -193,7 +193,7 @@ function endScreen() {
   // we set the high scores in a list
   userHighScore = document.querySelector("#initials").value;
   highScores.push(userHighScore);
-  highScoreMessage.innerHTML = highScores[0];
+  highScoreMessage.textContent = highScores[0];
   seeHighScore.style.display = "flex";
   quizComplete.style.display = "none";
 }
