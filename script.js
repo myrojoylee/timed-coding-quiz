@@ -165,6 +165,7 @@ function continueQuiz() {
   console.log("here?");
   if (seconds > 0) {
     for (let i = 1; i < quizBank.length; i++) {
+      console.log("hi");
       quizCardQuestion.innerHTML = quizBank[i].question;
       let x = quizBank[i];
       for (let i = 0; i < x.options.length; i++) {
