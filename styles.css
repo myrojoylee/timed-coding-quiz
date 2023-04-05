@@ -56,6 +56,17 @@ header {
   color: var(--clr--secondary);
 }
 
+header p {
+  font-size: 1.25em;
+}
+
+.time-and-score {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 0.5em;
+}
+
 .view-high-scores {
   cursor: pointer;
 }
@@ -114,7 +125,7 @@ header {
   border-radius: 0.5em;
   color: var(--clr--ntrl--light);
   padding: 0.5em 1em;
-  width: 35%;
+  width: 60%;
   text-align: left;
   /* font-size: 1.3em; */
 }
@@ -164,18 +175,23 @@ header {
 .score-wrapper {
   display: flex;
   align-items: center;
-  font-size: 1.25em;
   gap: 0.5em;
+}
+
+.score-wrapper span,
+form p {
+  font-size: 1.25em;
 }
 
 .initials {
   display: flex;
-  align-items: center;
+  align-items: end;
   gap: 1em;
 }
 
 #initials {
   width: 25vw;
+  height: 30px;
   border: 1px solid grey;
 }
 
@@ -218,21 +234,32 @@ header {
 /* =-=-=-=-=-=-=-=-=-=- RESPONSIVE STYLING, -=-=-=-=-=-=-=-=-=-=-= */
 /* =-=-=-=-=-=-=-=-=-=-=-=-= TABLET =-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
+  header p {
+    font-size: 1em;
+  }
   .quiz-card {
     gap: 1.25em;
   }
 
   .quiz-card-title {
     padding-top: 0.5em;
-    font-size: 1.75em;
+    font-size: 1.5em;
   }
 
   .quiz-card-content {
-    padding: 0 7.5em;
+    padding: 0 3em;
+  }
+  .quiz-card-content span {
+    font-size: 1em;
   }
 
   .quiz-card-question {
     padding-top: 0.5em;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 0.5em 0.5em;
   }
 
   .option-buttons {
@@ -266,6 +293,10 @@ header {
   .clear {
     width: fit-content;
   }
+
+  .submit-high-score {
+    width: fit-content;
+  }
 }
 
 /* =-=-=-=-=-=-=-=-=-=- RESPONSIVE STYLING, -=-=-=-=-=-=-=-=-=-=-= */
@@ -274,6 +305,11 @@ header {
 @media screen and (max-width: 767px) {
   header p {
     font-size: 0.75em;
+    padding: 0 0.5em;
+  }
+
+  .time-and-score {
+    gap: 0.1em;
   }
 
   .quiz-card {
@@ -299,7 +335,7 @@ header {
   }
 
   .quiz-card-title {
-    padding-top: 0.5em;
+    padding-top: 0.1em;
     font-size: 1.25em;
   }
 
@@ -327,13 +363,18 @@ header {
 
   .options {
     padding: 0.5em;
-    width: 100%;
-    font-size: 0.75em;
+    width: 70%;
+    font-size: 0.5em;
   }
 
   .quiz-complete {
-    padding: 1em 2em;
-    gap: 0.75em;
+    padding: 0 2em;
+    gap: 0.5em;
+  }
+
+  .score-wrapper span,
+  form p {
+    font-size: 1em;
   }
 
   .end-statement {
@@ -341,17 +382,16 @@ header {
   }
 
   .clear-high-scores,
-  .go {
+  .go,
+  .submit-initials,
+  .start,
+  .high-score-message {
     font-size: 0.75em;
   }
 
   .submit-high-score {
-    width: fit-content;
-  }
-
-  .start {
-    width: fit-content;
-    font-size: 0.75em;
+    padding: 0.25em 0.5em;
+    /* width: fit-content; */
   }
 
   .see-high-scores {
@@ -364,12 +404,6 @@ header {
 
   .high-score-title {
     font-size: 1.25em;
-  }
-
-  .clear-high-scores,
-  .go,
-  .high-score-message {
-    font-size: 0.75em;
   }
 
   .go-back,

@@ -40,7 +40,7 @@ const quizQuestionSix = {
 };
 
 const quizQuestionSeven = {
-  question: "Visual Studio Code is an example of a ",
+  question: "Visual Studio Code is an example of a ___________.",
   answer: "code editor",
   options: [
     "word processor",
@@ -84,11 +84,13 @@ const quizBank = [
 let highScores = [];
 let int = null;
 let seconds = 75;
-let count = 1;
+let currentScore = 0;
+let count = 0;
 let quizInterval;
 let currentAnswer = quizBank[0].answer;
 
 const quizCountdown = document.querySelector(".quiz-countdown");
+const updatedScore = document.querySelector(".current-score");
 const startTimer = document.querySelector("#start-quiz");
 const beforeQuizContent = document.querySelector(".before-quiz-content");
 const quizCardContent = document.querySelector(".quiz-card-content");
@@ -106,6 +108,7 @@ let userHighScore = "";
 const submitScore = document.querySelector(".submit-high-score");
 const seeHighScore = document.querySelector(".see-high-scores");
 const highScoreMessage = document.querySelector(".high-score-message");
+const finalScore = document.querySelector(".final-score");
 const goBack = document.querySelector(".go-back");
 const clearHighScore = document.querySelector(".clear");
 
@@ -127,6 +130,7 @@ function startQuiz() {
 
   //we need to start the timer
   quizCountdown.textContent = `Time: ${seconds}`;
+
   quizInterval = setInterval(function () {
     if (seconds > 0) {
       seconds--;
@@ -142,16 +146,29 @@ function startQuiz() {
 // give user feedback after they
 // choose answer
 function rightOrWrong(e) {
-  if (e.currentTarget.children[1].textContent === currentAnswer) {
+  // accessing the second span of the button
+  // and getting the text content within
+  var x = e.currentTarget.children[1].textContent;
+
+  if (x === currentAnswer) {
+    currentScore += 20;
+    updatedScore.textContent = `Score: ${currentScore}`;
     rightAnswer.style.display = "block";
     wrongAnswer.style.display = "none";
   } else {
+    if (currentScore > 20) {
+      currentScore -= 20;
+      updatedScore.textContent = `Score: ${currentScore}`;
+    } else {
+      currentScore = 0;
+    }
     rightAnswer.style.display = "none";
     wrongAnswer.style.display = "block";
     seconds = seconds - 10;
   }
   // go to next Q after 500ms
   setTimeout(() => {
+    count++;
     continueQuiz();
   }, 500);
 }
@@ -162,17 +179,18 @@ function continueQuiz() {
   // question/answer bank
   rightAnswer.style.display = "none";
   wrongAnswer.style.display = "none";
-  console.log("here?");
-  if (seconds > 0) {
+
+  if (seconds > 0 && count < 10) {
     for (let i = 1; i < quizBank.length; i++) {
-      console.log("hi");
-      quizCardQuestion.textContent = quizBank[i].question;
-      let x = quizBank[i];
-      for (let i = 0; i < x.options.length; i++) {
-        textAnswer[i].textContent = x.options[i];
+      if (count === i) {
+        console.log("hi");
+        quizCardQuestion.textContent = quizBank[i].question;
+        let x = quizBank[i];
+        for (let i = 0; i < x.options.length; i++) {
+          textAnswer[i].textContent = x.options[i];
+        }
+        currentAnswer = quizBank[i].answer;
       }
-      currentAnswer = quizBank[i].answer;
-      // rightOrWrong();
     }
   } else {
     endGame();
@@ -183,6 +201,7 @@ function endGame() {
   // game ends
   quizCardContent.style.display = "none";
   quizComplete.style.display = "flex";
+  finalScore.textContent = `${currentScore}!`;
   submitScore.addEventListener("click", endScreen);
   goBack.addEventListener("click", function () {
     location.reload();
@@ -193,7 +212,7 @@ function endScreen() {
   // we set the high scores in a list
   userHighScore = document.querySelector("#initials").value;
   highScores.push(userHighScore);
-  highScoreMessage.textContent = highScores[0];
+  highScoreMessage.textContent = `${highScores[0]}  ${currentScore}`;
   seeHighScore.style.display = "flex";
   quizComplete.style.display = "none";
 }
