@@ -1,5 +1,4 @@
-//=================
-
+// ======================================================================== //
 // ================= OBJECTS FOR QUESTIONS AND ANSWERS ==================== //
 // ======================================================================== //
 
@@ -81,13 +80,21 @@ const quizBank = [
   quizQuestionTen,
 ];
 
+// variables for high scores object to prepare for local storage
 let highScores = [];
-// let int = null;
+let playerName, playerScore;
+let userHighScore = "Anonymous";
+let accessHighScores;
+
+// variables to help loop through question bank, keep time, and score
 let seconds = 75;
 let currentScore = 0;
 let count = 0;
 let quizInterval;
 let currentAnswer = quizBank[0].answer;
+
+// ======================= QUERY SELECTOR VARIABLES ======================= //
+// ======================================================================== //
 
 const quizCountdown = document.querySelector(".quiz-countdown");
 const updatedScore = document.querySelector(".current-score");
@@ -103,15 +110,15 @@ const answerFeedback = document.querySelectorAll(".options");
 const rightAnswer = document.querySelector(".right-answer");
 const wrongAnswer = document.querySelector(".wrong-answer");
 const textAnswer = document.querySelectorAll(".answer");
+
 // submit button
-let userHighScore = "Anonymous";
 const submitScore = document.querySelector(".submit-high-score");
 const seeHighScore = document.querySelector(".see-high-scores");
 const highScoreMessage = document.querySelector(".high-score-message");
 const finalScore = document.querySelector(".final-score");
 const goBack = document.querySelector(".go-back");
 const clearHighScore = document.querySelector(".clear");
-
+const viewHighScores = document.querySelector(".view-high-scores");
 // ==================================================================== //
 //            -------------------CODE BELOW------------------
 // ==================================================================== //
@@ -119,7 +126,8 @@ const clearHighScore = document.querySelector(".clear");
 startTimer.addEventListener("click", startQuiz);
 
 function startQuiz() {
-  // we need the intro stuff to go away
+  // we need the intro content to be replaced
+  // by the questions
   beforeQuizContent.style.display = "none";
   quizCardContent.style.display = "flex";
 
@@ -128,7 +136,7 @@ function startQuiz() {
     answerFeedback[i].addEventListener("click", rightOrWrong);
   }
 
-  //we need to start the timer
+  // start the countdown
   quizCountdown.textContent = `Time: ${seconds}`;
 
   quizInterval = setInterval(function () {
@@ -138,13 +146,12 @@ function startQuiz() {
     } else {
       clearInterval(quizInterval);
       quizCountdown.textContent = `Time: 0`;
-      endGame();
+      endQuiz();
     }
   }, 1000);
 }
 
-// give user feedback after they
-// choose answer
+// give user real-time feedback
 function rightOrWrong(e) {
   // accessing the second span of the button
   // and getting the text content within
@@ -157,7 +164,7 @@ function rightOrWrong(e) {
     wrongAnswer.style.display = "none";
   } else {
     if (currentScore >= 20) {
-      currentScore -= 20;
+      currentScore -= 10;
       updatedScore.textContent = `Score: ${currentScore}`;
     } else {
       currentScore = 0;
@@ -166,7 +173,7 @@ function rightOrWrong(e) {
     wrongAnswer.style.display = "block";
     seconds = seconds - 10;
   }
-  // go to next Q after 500ms
+  // go to next question after 500ms
   setTimeout(() => {
     count++;
     continueQuiz();
@@ -174,8 +181,7 @@ function rightOrWrong(e) {
 }
 
 function continueQuiz() {
-  // loop through all the questions
-  // in the question/answer bank
+  // loop through all the questions in question bank
   rightAnswer.style.display = "none";
   wrongAnswer.style.display = "none";
 
@@ -191,12 +197,17 @@ function continueQuiz() {
       }
     }
   } else {
-    endGame();
+    // high score is score plus remaining time
+    currentScore = currentScore + seconds;
+    updatedScore.textContent = `Score: ${currentScore}`;
+    // once quiz is done, timer goes to 0
+    seconds = 0;
+    endQuiz();
   }
 }
 
-function endGame() {
-  // game ends
+function endQuiz() {
+  // quiz ends
   quizCardContent.style.display = "none";
   quizComplete.style.display = "flex";
   finalScore.textContent = `${currentScore}!`;
@@ -209,18 +220,32 @@ function endGame() {
 function endScreen() {
   // we set the high scores in a list
   userHighScore = document.querySelector("#initials").value;
-  highScores.push(userHighScore);
-  if ((userHighScore = "")) {
-    highScoreMessage.textContent = `${highScores[0]}:  ${currentScore}`;
+  playerName = userHighScore;
+  playerScore = currentScore;
+  let temp = { name: playerName, score: currentScore };
+  console.log(temp);
+  if (userHighScore === "") {
+    playerName = "Anonymous";
+    highScoreMessage.textContent = `${playerName}:  ${playerScore}`;
+
+    console.log(highScores);
+  } else {
+    playerName = userHighScore;
+    highScoreMessage.textContent = `${playerName}:  ${playerScore}`;
   }
-  highScoreMessage.textContent = `${highScores[0]}:  ${currentScore}`;
+  highScores.push(temp);
+  console.log(highScores);
   seeHighScore.style.display = "flex";
   quizComplete.style.display = "none";
-  if (localStorage !== "null") {
-  }
+  viewHighScores.addEventListener("click", localStorage);
 }
 
 // need to implement local storage
 function localStorage() {
-  console.log(`don't know`);
+  accessHighScores = localStorage.setItem(
+    "high score array",
+    JSON.stringify(highScores)
+  );
+
+  console.log(accessHighScores);
 }
