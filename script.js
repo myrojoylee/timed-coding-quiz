@@ -119,6 +119,9 @@ const finalScore = document.querySelector(".final-score");
 const goBack = document.querySelector(".go-back");
 const clearHighScore = document.querySelector(".clear");
 const viewHighScores = document.querySelector(".view-high-scores");
+viewHighScores.addEventListener("click", function () {
+  highScores = JSON.parse(localStorage.getItem("high score array"));
+});
 
 // ==================================================================== //
 //            -------------------CODE BELOW------------------
@@ -235,17 +238,18 @@ function endScreen() {
     highScoreMessage.textContent = `${playerName}:  ${playerScore}`;
   }
   highScores.push(temp);
-  console.log(highScores);
+  // console.log(highScores);
   seeHighScore.style.display = "flex";
   quizComplete.style.display = "none";
-  viewHighScores.addEventListener("click", accessLocalStorage);
+
+  accessLocalStorage();
 }
 
 // need to implement local storage
 function accessLocalStorage() {
-  console.log("do we get here ?");
   localStorage.setItem("high score array", JSON.stringify(highScores));
-  var x = localStorage.getItem("high score array");
-  var y = JSON.parse(x);
-  console.log(y);
+}
+
+function addToExistingHighScores() {
+  // we need to add other high scores even after refresh.
 }
