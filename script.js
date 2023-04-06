@@ -243,6 +243,12 @@ function endScreen() {
   quizComplete.style.display = "none";
 
   accessLocalStorage();
+
+  for (let i = 0; i < highScores.length; i++) {
+    let newHighScoreLine = document.createElement("p");
+    newHighScoreLine.textContent = `${highScores[i].name}: ${highScores[i].score}`;
+    seeHighScore.append(newHighScoreLine);
+  }
 }
 
 // need to implement local storage
