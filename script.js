@@ -82,7 +82,7 @@ const quizBank = [
 ];
 
 let highScores = [];
-let int = null;
+// let int = null;
 let seconds = 75;
 let currentScore = 0;
 let count = 0;
@@ -104,7 +104,7 @@ const rightAnswer = document.querySelector(".right-answer");
 const wrongAnswer = document.querySelector(".wrong-answer");
 const textAnswer = document.querySelectorAll(".answer");
 // submit button
-let userHighScore = "";
+let userHighScore = "Anonymous";
 const submitScore = document.querySelector(".submit-high-score");
 const seeHighScore = document.querySelector(".see-high-scores");
 const highScoreMessage = document.querySelector(".high-score-message");
@@ -156,7 +156,7 @@ function rightOrWrong(e) {
     rightAnswer.style.display = "block";
     wrongAnswer.style.display = "none";
   } else {
-    if (currentScore > 20) {
+    if (currentScore >= 20) {
       currentScore -= 20;
       updatedScore.textContent = `Score: ${currentScore}`;
     } else {
@@ -175,15 +175,13 @@ function rightOrWrong(e) {
 
 function continueQuiz() {
   // loop through all the questions
-  // replace values with
-  // question/answer bank
+  // in the question/answer bank
   rightAnswer.style.display = "none";
   wrongAnswer.style.display = "none";
 
   if (seconds > 0 && count < 10) {
     for (let i = 1; i < quizBank.length; i++) {
       if (count === i) {
-        console.log("hi");
         quizCardQuestion.textContent = quizBank[i].question;
         let x = quizBank[i];
         for (let i = 0; i < x.options.length; i++) {
@@ -212,12 +210,17 @@ function endScreen() {
   // we set the high scores in a list
   userHighScore = document.querySelector("#initials").value;
   highScores.push(userHighScore);
-  highScoreMessage.textContent = `${highScores[0]}  ${currentScore}`;
+  if ((userHighScore = "")) {
+    highScoreMessage.textContent = `${highScores[0]}:  ${currentScore}`;
+  }
+  highScoreMessage.textContent = `${highScores[0]}:  ${currentScore}`;
   seeHighScore.style.display = "flex";
   quizComplete.style.display = "none";
+  if (localStorage !== "null") {
+  }
 }
 
 // need to implement local storage
-function whatDoWeDoHere() {
+function localStorage() {
   console.log(`don't know`);
 }

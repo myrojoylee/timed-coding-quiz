@@ -65,9 +65,11 @@ header p {
   flex-direction: column;
   align-items: end;
   gap: 0.5em;
+  color: black;
 }
 
 .view-high-scores {
+  height: fit-content;
   cursor: pointer;
 }
 
@@ -189,6 +191,8 @@ form p {
   gap: 1em;
 }
 
+/* ~~~~~~~ Input Text Box for initials ~~~~~~~ */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 #initials {
   width: 25vw;
   height: 30px;
@@ -237,10 +241,14 @@ form p {
   header p {
     font-size: 1em;
   }
+
   .quiz-card {
     gap: 1.25em;
   }
 
+  .before-quiz-content {
+    padding: 0 5em;
+  }
   .quiz-card-title {
     padding-top: 0.5em;
     font-size: 1.5em;
@@ -357,13 +365,14 @@ form p {
 
   .option-buttons {
     display: grid;
+    width: 100%;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
   }
 
   .options {
     padding: 0.5em;
-    width: 70%;
+    width: 100%;
     font-size: 0.5em;
   }
 
