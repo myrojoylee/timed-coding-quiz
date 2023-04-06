@@ -119,6 +119,7 @@ const finalScore = document.querySelector(".final-score");
 const goBack = document.querySelector(".go-back");
 const clearHighScore = document.querySelector(".clear");
 const viewHighScores = document.querySelector(".view-high-scores");
+
 // ==================================================================== //
 //            -------------------CODE BELOW------------------
 // ==================================================================== //
@@ -237,15 +238,14 @@ function endScreen() {
   console.log(highScores);
   seeHighScore.style.display = "flex";
   quizComplete.style.display = "none";
-  viewHighScores.addEventListener("click", localStorage);
+  viewHighScores.addEventListener("click", accessLocalStorage);
 }
 
 // need to implement local storage
-function localStorage() {
-  accessHighScores = localStorage.setItem(
-    "high score array",
-    JSON.stringify(highScores)
-  );
-
-  console.log(accessHighScores);
+function accessLocalStorage() {
+  console.log("do we get here ?");
+  localStorage.setItem("high score array", JSON.stringify(highScores));
+  var x = localStorage.getItem("high score array");
+  var y = JSON.parse(x);
+  console.log(y);
 }
