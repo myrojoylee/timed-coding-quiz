@@ -125,6 +125,7 @@ const viewHighScores = document.querySelector(".view-high-scores");
 // adding functionality to these buttons
 // in case someone clicks them early
 viewHighScores.addEventListener("click", function () {
+  // location.reload();
   beforeQuizContent.style.display = "none";
   if (localStorage !== null) {
     highScores = JSON.parse(localStorage.getItem("high score array"));
@@ -275,33 +276,34 @@ function displayHighScores() {
   seeHighScore.style.display = "flex";
   quizComplete.style.display = "none";
 
-  sortScores(highScores);
-  // console.log(highScores);
-  let y = highScores.reverse();
-  // console.log(y);
-  for (let i = 0; i < highScores.length; i++) {
-    let x = document.createElement("p");
-    x.textContent = `${highScores[i].name}: ${highScores[i].score}`;
-    seeHighScore.insertBefore(x, highScoreTitle.nextSibling);
-    x.style.backgroundColor = "#d9d3e9";
-    x.style.fontSize = "0.75em";
-    x.style.padding = "0.25em";
+  let z = document.querySelector(".see-high-scores").childElementCount;
+  if (z <= 2) {
+    sortScores(highScores);
+    let y = highScores.reverse();
+    for (let i = 0; i < highScores.length; i++) {
+      let x = document.createElement("p");
+      x.textContent = `${highScores[i].name}: ${highScores[i].score}`;
+      seeHighScore.insertBefore(x, highScoreTitle.nextSibling);
+      x.style.backgroundColor = "#d9d3e9";
+      x.style.fontSize = "0.75em";
+      x.style.padding = "0.25em";
+    }
   }
 }
 
 function sortScores(object) {
   // scores will display from highest to lowest
   for (let i = 1; i < object.length; i++) {
-    let key = object[i].score;
+    let key = object[i];
     let j = i - 1;
 
-    while (j >= 0 && object[i].score > key) {
-      object[j + 1].score = object[j].score;
+    while (j >= 0 && key.score > object[j].score) {
+      object[j + 1] = object[j];
       j = j - 1;
     }
-    object[j + 1].score = key;
+    object[j + 1] = key;
   }
 
-  object.reverse();
+  console.log(object);
   return object;
 }
