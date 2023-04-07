@@ -92,6 +92,7 @@ let currentScore = 0;
 let count = 0;
 let quizInterval;
 let currentAnswer = quizBank[0].answer;
+let temp;
 
 // ======================= QUERY SELECTOR VARIABLES ======================= //
 // ======================================================================== //
@@ -119,9 +120,10 @@ const finalScore = document.querySelector(".final-score");
 const goBack = document.querySelector(".go-back");
 const clearHighScore = document.querySelector(".clear");
 const viewHighScores = document.querySelector(".view-high-scores");
-viewHighScores.addEventListener("click", function () {
-  highScores = JSON.parse(localStorage.getItem("high score array"));
-});
+// viewHighScores.addEventListener("click", function () {
+//   highScores = JSON.parse(localStorage.getItem("high score array"));
+//   // getAllTheHighScores();
+// });
 
 // ==================================================================== //
 //            -------------------CODE BELOW------------------
@@ -203,6 +205,9 @@ function continueQuiz() {
   } else {
     // high score is score plus remaining time
     currentScore = currentScore + seconds;
+    if (currentScore < 0) {
+      currentScore = 0;
+    }
     updatedScore.textContent = `Score: ${currentScore}`;
     // once quiz is done, timer goes to 0
     seconds = 0;
@@ -215,8 +220,13 @@ function endQuiz() {
   quizCardContent.style.display = "none";
   quizComplete.style.display = "flex";
   finalScore.textContent = `${currentScore}!`;
+
   submitScore.addEventListener("click", endScreen);
   goBack.addEventListener("click", function () {
+    location.reload();
+  });
+  clearHighScore.addEventListener("click", function () {
+    localStorage.clear();
     location.reload();
   });
 }
@@ -225,9 +235,14 @@ function endScreen() {
   // we set the high scores in a list
   userHighScore = document.querySelector("#initials").value;
   playerName = userHighScore;
-  playerScore = currentScore;
-  let temp = { name: playerName, score: currentScore };
-  console.log(temp);
+  if (currentScore > 0) {
+    playerScore = currentScore;
+  } else {
+    playerScore = 0;
+  }
+
+  temp = { name: playerName, score: currentScore };
+  // console.log(temp);
   if (userHighScore === "") {
     playerName = "Anonymous";
     highScoreMessage.textContent = `${playerName}:  ${playerScore}`;
@@ -237,25 +252,27 @@ function endScreen() {
     playerName = userHighScore;
     highScoreMessage.textContent = `${playerName}:  ${playerScore}`;
   }
-  highScores.push(temp);
-  // console.log(highScores);
+  console.log(highScores);
+  // we grab the previous high scores from storage
+  // parse string into the high scores object
+  //
+  if (localStorage.getItem("high score array") === null) {
+    highScores.push(temp);
+    localStorage.setItem("high score array", JSON.stringify(highScores));
+  } else {
+    highScores = JSON.parse(localStorage.getItem("high score array"));
+    highScores.push(temp);
+    localStorage.setItem("high score array", JSON.stringify(highScores));
+  }
+
+  // add the current player's info to the high scores object
+
   seeHighScore.style.display = "flex";
   quizComplete.style.display = "none";
 
-  accessLocalStorage();
-
-  for (let i = 0; i < highScores.length; i++) {
-    let newHighScoreLine = document.createElement("p");
-    newHighScoreLine.textContent = `${highScores[i].name}: ${highScores[i].score}`;
-    seeHighScore.append(newHighScoreLine);
-  }
-}
-
-// need to implement local storage
-function accessLocalStorage() {
-  localStorage.setItem("high score array", JSON.stringify(highScores));
-}
-
-function addToExistingHighScores() {
-  // we need to add other high scores even after refresh.
+  // for (let i = 0; i < highScores.length; i++) {
+  //   let newHighScoreLine = document.createElement("p");
+  //   newHighScoreLine.textContent = `${highScores[i].name}: ${highScores[i].score}`;
+  //   seeHighScore.append(newHighScoreLine);
+  // }
 }
