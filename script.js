@@ -116,14 +116,25 @@ const textAnswer = document.querySelectorAll(".answer");
 const submitScore = document.querySelector(".submit-high-score");
 const seeHighScore = document.querySelector(".see-high-scores");
 const highScoreMessage = document.querySelector(".high-score-message");
+const highScoreTitle = document.querySelector(".high-score-title");
 const finalScore = document.querySelector(".final-score");
 const goBack = document.querySelector(".go-back");
 const clearHighScore = document.querySelector(".clear");
 const viewHighScores = document.querySelector(".view-high-scores");
-// viewHighScores.addEventListener("click", function () {
-//   highScores = JSON.parse(localStorage.getItem("high score array"));
-//   // getAllTheHighScores();
-// });
+
+// adding functionality to these buttons
+// in case someone clicks them early
+viewHighScores.addEventListener("click", function () {
+  beforeQuizContent.style.display = "none";
+  displayHighScores();
+});
+goBack.addEventListener("click", function () {
+  location.reload();
+});
+clearHighScore.addEventListener("click", function () {
+  localStorage.clear();
+  location.reload();
+});
 
 // ==================================================================== //
 //            -------------------CODE BELOW------------------
@@ -222,13 +233,6 @@ function endQuiz() {
   finalScore.textContent = `${currentScore}!`;
 
   submitScore.addEventListener("click", endScreen);
-  goBack.addEventListener("click", function () {
-    location.reload();
-  });
-  clearHighScore.addEventListener("click", function () {
-    localStorage.clear();
-    location.reload();
-  });
 }
 
 function endScreen() {
@@ -240,19 +244,15 @@ function endScreen() {
   } else {
     playerScore = 0;
   }
-
-  temp = { name: playerName, score: currentScore };
-  // console.log(temp);
   if (userHighScore === "") {
     playerName = "Anonymous";
-    highScoreMessage.textContent = `${playerName}:  ${playerScore}`;
-
     console.log(highScores);
   } else {
     playerName = userHighScore;
-    highScoreMessage.textContent = `${playerName}:  ${playerScore}`;
   }
-  console.log(highScores);
+  temp = { name: playerName, score: currentScore };
+  // console.log(temp);
+
   // we grab the previous high scores from storage
   // parse string into the high scores object
   //
@@ -265,14 +265,23 @@ function endScreen() {
     localStorage.setItem("high score array", JSON.stringify(highScores));
   }
 
-  // add the current player's info to the high scores object
+  displayHighScores();
+}
 
+function displayHighScores() {
   seeHighScore.style.display = "flex";
   quizComplete.style.display = "none";
 
-  // for (let i = 0; i < highScores.length; i++) {
-  //   let newHighScoreLine = document.createElement("p");
-  //   newHighScoreLine.textContent = `${highScores[i].name}: ${highScores[i].score}`;
-  //   seeHighScore.append(newHighScoreLine);
-  // }
+  for (let i = 0; i < highScores.length; i++) {
+    let x = document.createElement("p");
+    x.textContent = `${highScores[i].name}: ${highScores[i].score}`;
+    seeHighScore.insertBefore(x, highScoreTitle.nextSibling);
+    x.style.backgroundColor = "#d9d3e9";
+    x.style.fontSize = "0.75em";
+    x.style.padding = "0.25em";
+  }
+}
+
+function sortScores() {
+  // scores will display from highest to lowest
 }
