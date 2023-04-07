@@ -130,15 +130,16 @@ const viewHighScores = document.querySelector(".view-high-scores");
 // in case someone clicks them early
 viewHighScores.addEventListener("click", function () {
   beforeQuizContent.style.display = "none";
+  seeHighScore.style.display = "flex";
+  quizComplete.style.display = "none";
 
   // this prevents the items from duplicating
   // if the 'view high scores' button is pressed
   // multiple times in succession
-  if (localStorage !== null) {
+  if (localStorage.length != 0) {
     highScores = JSON.parse(localStorage.getItem("high score array"));
+    displayHighScores();
   }
-
-  displayHighScores();
 });
 
 goBack.addEventListener("click", function () {
