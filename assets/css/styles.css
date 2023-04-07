@@ -220,12 +220,6 @@ form p {
   gap: 1em;
 }
 
-.high-score-message {
-  background-color: var(--clr--ntrl--purple);
-  font-size: 1.25em;
-  padding: 0.25em;
-}
-
 .go-back,
 .clear {
   width: fit-content;
@@ -291,23 +285,16 @@ form p {
     gap: 1em;
   }
 
-  .start {
-    width: fit-content;
-  }
-
   .see-high-scores {
     display: none;
-    /* display: flex; */
     flex-direction: column;
     padding: 2em 5em;
     gap: 1em;
   }
 
   .go-back,
-  .clear {
-    width: fit-content;
-  }
-
+  .clear,
+  .start,
   .submit-high-score {
     width: fit-content;
   }
@@ -354,7 +341,6 @@ form p {
   }
 
   .before-quiz-content {
-    /* display: none; */
     text-align: center;
     padding: 0 0.25em;
     font-size: 0.75em;
@@ -399,19 +385,16 @@ form p {
   .clear-high-scores,
   .go,
   .submit-initials,
-  .start,
-  .high-score-message {
+  .start {
     font-size: 0.75em;
   }
 
   .submit-high-score {
     padding: 0.25em 0.5em;
-    /* width: fit-content; */
   }
 
   .see-high-scores {
     display: none;
-    /* display: flex; */
     flex-direction: column;
     padding: 0.25em;
     gap: 0.5em;

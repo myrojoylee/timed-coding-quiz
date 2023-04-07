@@ -9,6 +9,7 @@ First, the website's base content was created in HTML and a responsive layout wa
 ## Usage
 
 Demo:
+
 <img src="https://github.com/myrojoylee/timed-coding-quiz/blob/main/assets/images/coding-quiz-sequence.gif" width = "700" />
 
 [Click here for live demo](https://myrojoylee.github.io/timed-coding-quiz/)

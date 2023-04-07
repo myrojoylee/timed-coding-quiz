@@ -122,43 +122,51 @@ const goBack = document.querySelector(".go-back");
 const clearHighScore = document.querySelector(".clear");
 const viewHighScores = document.querySelector(".view-high-scores");
 
+// ==================================================================== //
+//            -------------------CODE BELOW------------------
+// ==================================================================== //
+
 // adding functionality to these buttons
 // in case someone clicks them early
 viewHighScores.addEventListener("click", function () {
-  // location.reload();
   beforeQuizContent.style.display = "none";
+
+  // this prevents the items from duplicating
+  // if the 'view high scores' button is pressed
+  // multiple times in succession
   if (localStorage !== null) {
     highScores = JSON.parse(localStorage.getItem("high score array"));
   }
 
   displayHighScores();
 });
+
 goBack.addEventListener("click", function () {
   location.reload();
 });
+
 clearHighScore.addEventListener("click", function () {
   localStorage.clear();
   location.reload();
 });
 
-// ==================================================================== //
-//            -------------------CODE BELOW------------------
-// ==================================================================== //
+// =-=-=-=-=-=-=- QUIZ BEGINS HERE -=-=-=-=-=-=-= //
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
+
 // quiz begins when 'start quiz' is clicked:
 startTimer.addEventListener("click", startQuiz);
 
 function startQuiz() {
-  // we need the intro content to be replaced
-  // by the questions
+  // replace intro content with quiz questions
   beforeQuizContent.style.display = "none";
   quizCardContent.style.display = "flex";
 
-  // adding event listeners to all answer options
+  // add event listener to all answer option buttons
   for (let i = 0; i < answerFeedback.length; i++) {
     answerFeedback[i].addEventListener("click", rightOrWrong);
   }
 
-  // start the countdown
+  // start countdown
   quizCountdown.textContent = `Time: ${seconds}`;
 
   quizInterval = setInterval(function () {
@@ -175,9 +183,8 @@ function startQuiz() {
 
 // give user real-time feedback
 function rightOrWrong(e) {
-  // accessing the second span of the button
-  // and getting the text content within
-  var x = e.currentTarget.children[1].textContent;
+  // access and modify the second span of the button
+  let x = e.currentTarget.children[1].textContent;
 
   if (x === currentAnswer) {
     currentScore += 20;
@@ -222,6 +229,7 @@ function continueQuiz() {
     // high score is score plus remaining time
     currentScore = currentScore + seconds;
     if (currentScore < 0) {
+      // if score is negative, it defaults to 0
       currentScore = 0;
     }
     updatedScore.textContent = `Score: ${currentScore}`;
@@ -240,6 +248,9 @@ function endQuiz() {
   submitScore.addEventListener("click", endScreen);
 }
 
+// =-=-=-=-=- DATA HANDLING BEGINS HERE -=-=-=-=- //
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
+
 function endScreen() {
   // we set the high scores in a list
   userHighScore = document.querySelector("#initials").value;
@@ -257,13 +268,13 @@ function endScreen() {
   }
   temp = { name: playerName, score: currentScore };
 
-  // we grab the previous high scores from storage
-  // parse string into the high scores object
-  //
+  // if storage is empty, set it
   if (localStorage.getItem("high score array") === null) {
     highScores.push(temp);
     localStorage.setItem("high score array", JSON.stringify(highScores));
-  } else {
+  }
+  // if storage is not empty, get string, parse, update array, then set again
+  else {
     highScores = JSON.parse(localStorage.getItem("high score array"));
     highScores.push(temp);
     localStorage.setItem("high score array", JSON.stringify(highScores));
@@ -276,6 +287,7 @@ function displayHighScores() {
   seeHighScore.style.display = "flex";
   quizComplete.style.display = "none";
 
+  // create elements and append
   let z = document.querySelector(".see-high-scores").childElementCount;
   if (z <= 2) {
     sortScores(highScores);
@@ -304,6 +316,5 @@ function sortScores(object) {
     object[j + 1] = key;
   }
 
-  console.log(object);
   return object;
 }
