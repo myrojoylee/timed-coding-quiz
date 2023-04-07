@@ -126,6 +126,10 @@ const viewHighScores = document.querySelector(".view-high-scores");
 // in case someone clicks them early
 viewHighScores.addEventListener("click", function () {
   beforeQuizContent.style.display = "none";
+  if (localStorage !== null) {
+    highScores = JSON.parse(localStorage.getItem("high score array"));
+  }
+
   displayHighScores();
 });
 goBack.addEventListener("click", function () {
@@ -251,7 +255,6 @@ function endScreen() {
     playerName = userHighScore;
   }
   temp = { name: playerName, score: currentScore };
-  // console.log(temp);
 
   // we grab the previous high scores from storage
   // parse string into the high scores object
@@ -272,6 +275,10 @@ function displayHighScores() {
   seeHighScore.style.display = "flex";
   quizComplete.style.display = "none";
 
+  sortScores(highScores);
+  // console.log(highScores);
+  let y = highScores.reverse();
+  // console.log(y);
   for (let i = 0; i < highScores.length; i++) {
     let x = document.createElement("p");
     x.textContent = `${highScores[i].name}: ${highScores[i].score}`;
@@ -282,6 +289,19 @@ function displayHighScores() {
   }
 }
 
-function sortScores() {
+function sortScores(object) {
   // scores will display from highest to lowest
+  for (let i = 1; i < object.length; i++) {
+    let key = object[i].score;
+    let j = i - 1;
+
+    while (j >= 0 && object[i].score > key) {
+      object[j + 1].score = object[j].score;
+      j = j - 1;
+    }
+    object[j + 1].score = key;
+  }
+
+  object.reverse();
+  return object;
 }

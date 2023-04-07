@@ -413,7 +413,7 @@ form p {
     display: none;
     /* display: flex; */
     flex-direction: column;
-    padding: 0.25em 2em;
+    padding: 0.25em;
     gap: 0.5em;
   }
 
