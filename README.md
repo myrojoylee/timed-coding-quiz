@@ -1,4 +1,4 @@
-# <TIMED CODING QUIZ>
+# <CODING QUIZ>
 
 ## Description
 
