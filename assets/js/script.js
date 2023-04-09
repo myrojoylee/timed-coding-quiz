@@ -187,6 +187,7 @@ function rightOrWrong(e) {
   // access and modify the second span of the button
   let x = e.currentTarget.children[1].textContent;
 
+  document.querySelector(".btn").classList.add(".change");
   if (x === currentAnswer) {
     currentScore += 20;
     updatedScore.textContent = `Score: ${currentScore}`;
@@ -203,11 +204,12 @@ function rightOrWrong(e) {
     wrongAnswer.style.display = "block";
     seconds = seconds - 10;
   }
+
   // go to next question after 500ms
   setTimeout(() => {
     count++;
     continueQuiz();
-  }, 500);
+  }, 750);
 }
 
 function continueQuiz() {

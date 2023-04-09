@@ -73,6 +73,10 @@ header p {
   cursor: pointer;
 }
 
+.view-high-scores:hover {
+  color: var(--clr--primary);
+}
+
 .quiz-card-content {
   display: none;
   flex-direction: column;
@@ -141,6 +145,16 @@ header p {
 .btn:hover {
   background-color: var(--clr--secondary);
   cursor: pointer;
+}
+
+.change {
+  animation: change 0.25s step-end both;
+}
+
+@keyframes change {
+  to {
+    color: var(--clr--primary);
+  }
 }
 
 /* =============== Introduction Content styling ============= */
