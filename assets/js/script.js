@@ -104,10 +104,9 @@ const beforeQuizContent = document.querySelector(".before-quiz-content");
 const quizCardContent = document.querySelector(".quiz-card-content");
 const quizCardQuestion = document.querySelector(".quiz-card-question");
 const quizComplete = document.querySelector(".quiz-complete");
-// var answerOption = document.querySelectorAll("button");
+
 const answerFeedback = document.querySelectorAll(".options");
 
-// clickToGetFeedback.addEventLIstener("click", continueQuiz);
 const rightAnswer = document.querySelector(".right-answer");
 const wrongAnswer = document.querySelector(".wrong-answer");
 const textAnswer = document.querySelectorAll(".answer");
@@ -187,7 +186,6 @@ function rightOrWrong(e) {
   // access and modify the second span of the button
   let x = e.currentTarget.children[1].textContent;
 
-  document.querySelector(".btn").classList.add(".change");
   if (x === currentAnswer) {
     currentScore += 20;
     updatedScore.textContent = `Score: ${currentScore}`;

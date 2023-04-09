@@ -133,7 +133,6 @@ header p {
   padding: 0.5em 1em;
   width: 60%;
   text-align: left;
-  /* font-size: 1.3em; */
 }
 
 .options,
@@ -145,16 +144,6 @@ header p {
 .btn:hover {
   background-color: var(--clr--secondary);
   cursor: pointer;
-}
-
-.change {
-  animation: change 0.25s step-end both;
-}
-
-@keyframes change {
-  to {
-    color: var(--clr--primary);
-  }
 }
 
 /* =============== Introduction Content styling ============= */
