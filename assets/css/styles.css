@@ -45,6 +45,7 @@ body {
   border-radius: 1em;
   width: 90%;
   height: 50vw;
+  max-height: 90vh;
   padding: 2em;
   gap: 2em;
   line-height: 1.25;
