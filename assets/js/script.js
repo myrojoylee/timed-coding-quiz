@@ -282,7 +282,6 @@ function endScreen() {
   }
 
   displayHighScores();
-  userHighScore.textContent = "";
 }
 
 function displayHighScores() {
