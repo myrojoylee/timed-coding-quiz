@@ -130,6 +130,10 @@ viewHighScores.addEventListener("click", viewHighScoresBeforeGame);
 goBack.addEventListener("click", function () {
   location.reload();
 });
+clearHighScore.addEventListener("click", function () {
+  localStorage.clear();
+  location.reload();
+});
 
 function viewHighScoresBeforeGame() {
   beforeQuizContent.style.display = "none";
@@ -143,11 +147,6 @@ function viewHighScoresBeforeGame() {
     highScores = JSON.parse(localStorage.getItem("high score array"));
     displayHighScores();
   }
-
-  clearHighScore.addEventListener("click", function () {
-    localStorage.clear();
-    location.reload();
-  });
 }
 
 // =-=-=-=-=-=-=- QUIZ BEGINS HERE -=-=-=-=-=-=-= //
@@ -283,6 +282,7 @@ function endScreen() {
   }
 
   displayHighScores();
+  userHighScore.textContent = "";
 }
 
 function displayHighScores() {
