@@ -125,9 +125,10 @@ const viewHighScores = document.querySelector(".view-high-scores");
 //            -------------------CODE BELOW------------------
 // ==================================================================== //
 
-// adding functionality to these buttons
-// in case someone clicks them early
-viewHighScores.addEventListener("click", function () {
+// allows user to view high scores before playing
+viewHighScores.addEventListener("click", viewHighScoresBeforeGame);
+
+function viewHighScoresBeforeGame() {
   beforeQuizContent.style.display = "none";
   seeHighScore.style.display = "flex";
   quizComplete.style.display = "none";
@@ -139,16 +140,16 @@ viewHighScores.addEventListener("click", function () {
     highScores = JSON.parse(localStorage.getItem("high score array"));
     displayHighScores();
   }
-});
 
-goBack.addEventListener("click", function () {
-  location.reload();
-});
+  goBack.addEventListener("click", function () {
+    location.reload();
+  });
 
-clearHighScore.addEventListener("click", function () {
-  localStorage.clear();
-  location.reload();
-});
+  clearHighScore.addEventListener("click", function () {
+    localStorage.clear();
+    location.reload();
+  });
+}
 
 // =-=-=-=-=-=-=- QUIZ BEGINS HERE -=-=-=-=-=-=-= //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
@@ -157,6 +158,8 @@ clearHighScore.addEventListener("click", function () {
 startTimer.addEventListener("click", startQuiz);
 
 function startQuiz() {
+  // disables the viewing of high scores while playing
+  viewHighScores.removeEventListener("click", viewHighScoresBeforeGame);
   // replace intro content with quiz questions
   beforeQuizContent.style.display = "none";
   quizCardContent.style.display = "flex";
@@ -302,6 +305,7 @@ function displayHighScores() {
       x.style.padding = "0.25em";
     }
   }
+  viewHighScores.addEventListener("click", viewHighScoresBeforeGame);
 }
 
 function sortScores(object) {
