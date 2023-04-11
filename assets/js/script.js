@@ -127,6 +127,9 @@ const viewHighScores = document.querySelector(".view-high-scores");
 
 // allows user to view high scores before playing
 viewHighScores.addEventListener("click", viewHighScoresBeforeGame);
+goBack.addEventListener("click", function () {
+  location.reload();
+});
 
 function viewHighScoresBeforeGame() {
   beforeQuizContent.style.display = "none";
@@ -140,10 +143,6 @@ function viewHighScoresBeforeGame() {
     highScores = JSON.parse(localStorage.getItem("high score array"));
     displayHighScores();
   }
-
-  goBack.addEventListener("click", function () {
-    location.reload();
-  });
 
   clearHighScore.addEventListener("click", function () {
     localStorage.clear();
@@ -266,7 +265,6 @@ function endScreen() {
   }
   if (userHighScore === "") {
     playerName = "Anonymous";
-    console.log(highScores);
   } else {
     playerName = userHighScore;
   }
